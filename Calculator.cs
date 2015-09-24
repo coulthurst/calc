@@ -38,25 +38,25 @@ namespace Calculator2
             if (symbol == "+")
             {
                 total = op.Add(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)) + " I hope you're proud of yourself. You disgust me.");
+                Console.WriteLine("Total : " + ("" + (total)));
                 num1 = total;
             }
             else if (symbol == "-")
             {
                 total = op.Subtract(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)) + " I hope you're proud of yourself. You disgust me.");
+                Console.WriteLine("Total : " + ("" + (total)));
                 num1 = total;
             }
             else if (symbol == "*")
             {
                 total = op.Multiply(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)) + " I hope you're proud of yourself. You disgust me.");
+                Console.WriteLine("Total : " + ("" + (total)));
                 num1 = total;
             }
             else if (symbol == "/")
             {
                 total = op.Divide(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)) + " I hope you're proud of yourself. You disgust me.");
+                Console.WriteLine("Total : " + ("" + (total)));
                 num1 = total;
             }
             else
@@ -68,7 +68,7 @@ namespace Calculator2
 
         public void OperatorErrorCheck()
         {
-            Console.WriteLine("Enter an operator you filthy animal: ");
+            Console.WriteLine("Enter an operator: ");
             try
             {
                 symbol = Console.ReadLine();
@@ -88,7 +88,7 @@ namespace Calculator2
         }
         public void CheckNumber(ref double? num)
         {
-            Console.WriteLine("Yo, Enter a number: ");
+            Console.WriteLine("Enter a number: ");
             try
             {
                 num = double.Parse(Console.ReadLine());
