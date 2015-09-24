@@ -10,95 +10,93 @@ namespace Calculator2
     {
         
         string symbol;
-        bool running = true;
         bool start = true;
-        public double? num1 = null;
-        public double? num2 = null;
-        public double? total = null;
+        public double? num1 = 0.0;
+        public double? num2 = 0.0;
+        public double? total = 0.0;
         Operation op = new Operation();
 
         public void Calculate()
         {
-            while (start)
+            while (start == true)
             {
                 this.CheckNumber(ref num1);
-
-                while (running)
-                {
-                    this.OperatorErrorCheck();
-                    this.CheckNumber(ref num2);
-                    this.ExecuteOperation(symbol);
-                }
-
+                this.CheckOperator();
+                this.CheckNumber(ref num2);
+                this.ExecuteOperation(symbol);
             }
+            
         }
         
         public void ExecuteOperation(string symbol)
         {
-            if (symbol == "+")
-            {
-                total = op.Add(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)));
-                num1 = total;
-            }
-            else if (symbol == "-")
-            {
-                total = op.Subtract(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)));
-                num1 = total;
-            }
-            else if (symbol == "*")
-            {
-                total = op.Multiply(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)));
-                num1 = total;
-            }
-            else if (symbol == "/")
-            {
-                total = op.Divide(num1, num2);
-                Console.WriteLine("Total : " + ("" + (total)));
-                num1 = total;
-            }
-            else
-            {
-                Console.WriteLine("Invalid operator. Try entering *, /, +, -, C to clear total or Q to exit.");
-                num2 = null;
-            }
+                if (symbol == "+")
+                {
+                    total = op.Add(num1, num2);
+                    Console.WriteLine(("" + num1) + " + " + ("" + num2) + " = " + ("" + (total)));
+                    num1 = total;
+                }
+                else if (symbol == "-")
+                {
+                    total = op.Subtract(num1, num2);
+                    Console.WriteLine(("" + num1) + " - " + ("" + num2) + " = " + ("" + (total)));
+                    num1 = total;
+                }
+                else if (symbol == "*")
+                {
+                    total = op.Multiply(num1, num2);
+                    Console.WriteLine(("" + num1) + " * " + ("" + num2) + " = " + ("" + (total)));
+                    num1 = total;
+                }
+                else if (symbol == "/")
+                {
+                    total = op.Divide(num1, num2);
+                    Console.WriteLine(("" + num1) + " / " + ("" + num2) + " = " + ("" + (total)));
+                    num1 = total;
+                }
+                else if (symbol.ToLower() == "c")
+                {
+                    Console.WriteLine("Clearing");
+                    num1 = 0;
+                    num2 = 0;
+                }
         }
 
-        public void OperatorErrorCheck()
+        public void CheckOperator()
         {
-            Console.WriteLine("Enter an operator: ");
-            try
+            bool running = true;
+            while(running == true)
             {
+                Console.WriteLine("Enter an operator: ");
                 symbol = Console.ReadLine();
-            }
-            catch (System.FormatException e)
-            {
-                Console.WriteLine("Invalid operator.");
-            }
-            if (symbol.ToLower() == "q")
-            {
-                start = false;
-            }
-            if (symbol.ToLower() == "c")
-            {
-                running = false;
+                if ((symbol != "/") && (symbol != "c") && (symbol != "-") && (symbol != "*") && (symbol != "+"))
+                {
+                    Console.WriteLine("Invalid operator. Try entering *, /, +, -, C to clear total.");
+                }
+                else
+                    running = false;
+                
             }
         }
         public void CheckNumber(ref double? num)
         {
-            Console.WriteLine("Enter a number: ");
-            try
+            bool running = true;
+            while (running == true)
             {
-                num = double.Parse(Console.ReadLine());
-                running = true;
-            }
-            catch (System.FormatException e)
-            {
-                Console.WriteLine("Try entering a number next time.");
-                running = false;
+                Console.WriteLine("Enter a number: ");
+                try
+                {
+                    num = double.Parse(Console.ReadLine());
+                    running = false;
+                }
+                catch (System.FormatException e)
+                {
+                    Console.WriteLine("Try entering a number next time.");
+                    running = true;
+                }
+                
             }
         }
+
     }
 }
